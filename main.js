@@ -1,0 +1,101 @@
+$(function() {
+  var dataObject=[
+    {
+      name:'Java',
+      num:1,
+      choice:'降',
+      change:-0.0001
+    },
+    {
+      name:"C",
+      num:2,
+      choice:'升',
+      change:+0.0244
+    },
+    {
+      name:"Python",
+      num:3,
+      choice:'升',
+      change:+0.0141
+    },
+    {
+      name:"C++",
+      num:4,
+      choice:'降',
+      change:-0.0258
+    },
+    {
+      name:"C#",
+      num:5,
+      choice:'升',
+      change:+0.0207
+    },
+    {
+      name:"Visual Basic .NET",
+      num:6,
+      choice:'降',
+      change:-0.0117
+    },
+    {
+      name:"JavaScript",
+      num:7,
+      choice:'降',
+      change:-0.0085
+    }
+  ];
+  
+  var itrender=function(instance,td,row,col,prop,value,cellProperties){
+    if(prop=='num'){
+      td.innerText=value;
+      td.style.verticalAlign='middle';
+      td.style.textAlign='center';
+    }
+    if(prop=='change'){
+      td.innerText=value > 0 ? "+"+numbro(value).format('0.00%'):numbro(value).format('0.00%');
+      td.style.verticalAlign='middle';
+      td.style.textAlign='center';
+    }
+    if(prop=='name' || prop=='choice'){
+      td.innerText=value;
+      td.style.verticalAlign='middle';
+      td.style.textAlign='center';
+    }
+  }
+
+  var container=$('#all');
+  container.handsontable({
+    data:dataObject,
+    columns:[
+      {
+        data:'name',
+        type:'text',
+        renderer:itrender
+      },
+      {
+        data:'num',
+        type:'numeric',
+        renderer:itrender
+      },
+      {
+        data:'choice',
+        type:'text',
+        renderer:itrender
+      },
+      {
+        data:'change',
+        type:'numeric',
+        renderer:itrender
+      }
+    ],
+    //部分属性不起作用？
+    maxRows:7,
+    colWidths:150,
+    rowHeights:40,
+    manualRowMove:true,
+    manualColumnMove:true,
+    rowHeaders:false,
+    colHeaders:['语言名称','排名','升或降','变化幅度'],
+    manualColumnResize:true,
+    manualRowResize:true,
+  }) 
+});
